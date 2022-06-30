@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
+@import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@300;400&display=swap');
+
+button, input, textarea {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  letter-spacing: 0.5px;
+  color:rgb(48, 48, 48);
+  font-size: 20px;
+}
+input, textarea {
+  font-weight: 300;
+}
+.App {
+  min-height: 100vh;
+  width: 100%;
+  background: #FFFADD;
+  background-image: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)), url("imgs/pen.png");
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-weight: 300;
+  color:rgb(48, 48, 48)
+}
+.App__Header {
+  background: #FED6BC;
+  background-image: url("imgs/inc-spots.png");
+  background-position: 65% 65%;
+  background-repeat: no-repeat;
+}
+.App__Header-Content {
+  width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+}
+.App__Header-Add {
+  font-size: 76px;
+  color: #FFFADD;
+  transition: 300ms;
+  flex: 1 0 auto;
+}
+.App__Header-Add:hover {
+  cursor: pointer;
+  color: #FED6BC;
+  text-shadow: 2px 0 0 #FFFADD, -2px 0 0 #FFFADD, 0 2px 0 #FFFADD, 0 -2px 0 #FFFADD, 1px 1px #FFFADD, -1px -1px 0 #FFFADD, 1px -1px 0 #FFFADD, -1px 1px 0 #FFFADD;
+  transition: 300ms;
+}
+.App__Header-Head {
+  font-size: 30px;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  text-align: center;
+  flex: 1 1 100%;
+}
+.App__Header-Clear {
+  font-size: 20px;
+  text-align: center;
+  padding: 0 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 68px;
+  transition: 300ms;
+  flex: 1 0 auto;
+}
+.App__Header-Clear:hover {
+  transform: scale(1.1);
+  transition: 300ms;
+}
+.App__Content {
+  width: 1200px;
+  margin: auto;
+}
+.App__Content-Tasks {
+  padding: 30px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px
+}
+
+
+.Task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 2px 2px 10px #FED6BC;
+  padding: 25px 40px;
+  font-size: 20px;
+  border-radius: 5px;
+  gap: 18px;
+  background-color: #fffbe7;
+  transition: 300ms;
+  transition-timing-function: ease-in;
+}
+.Task_Completed {
+  background-color: #eeeeee;
+  box-shadow: 2px 2px 10px #cccccc;
+  transition: 300ms;
+  transition-timing-function: ease-in;
+}
+.Task__Chb {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #FED6BC;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 40px 0 0;
+}
+.Task__Dates {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.Task__Subject {
+  flex: 1;
+  text-align: center;
+}
+.Task__Del {
+  font-weight: 300;
+}
+
+
+.Btn {
+  font-size: 20px;
+  background-color: #FFFADD;
+  border: 2px solid #FED6BC;
+  padding: 15px 50px;
+  border-radius: 5px;
+  transition: 300ms;
+  transition-timing-function: ease-in;
+}
+.Btn:hover {
+  cursor: pointer;
+  background-color: #FED6BC;
+  transition: 300ms;
+  transition-timing-function: ease-in;
+}
+.Btn_Completed {
+  background-color: #eeeeee;
+  border: 2px solid #cccccc;
+}
+.Btn_Completed:hover {
+  background-color: #cccccc;
+}
+
+
+.Popup {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.Popup__Overlay {
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+}
+.Popup__Form {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 50%;
+  height: 50%;
+  min-height: 400px;
+  top: 25%;
+  left: 25%;
+  background-color: #ffffe0;
+  border-radius: 25px;
+  padding: 50px;
+  box-sizing: border-box;
+}
+.Popup__Body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+.Popup__Row {
+  display: flex;
+}
+.Popup__Key {
+  flex: 1;
+  font-size: 20px;
+}
+.Popup__Value {
+  flex: 3;
+}
+.Popup__Input {
+  flex: 3;
+  resize: none;
+  background-color: #ffffe0;
+  border: 2px solid #FED6BC;
+  border-radius: 5px;
+  padding: 8px 15px;
+}
+.Popup__Input:focus-visible {
+  outline: none;
+}
+.Popup__Desc {
+  flex: 1;
+}
+.Popup__Footer {
+  display: flex;
+  gap: 20px;
+  justify-content: end;
+}
+
+
+.DateRange {
+  flex: 3;
+  display: flex;
+  align-items: center;
+  position: relative;
+  gap: 15px;
+}
+.DateRange__Icon {
+  cursor: pointer;
+  color:#d89569;
+}
+.DateRange__Calendar {
+  position: absolute;
+  z-index: 1;
+  top: 20px;
+  left: 15px;
+}
+.DateRange__Date {
+  font-size: 20px;
+}
