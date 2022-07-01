@@ -1,32 +1,39 @@
 import React, { useState } from "react";
-import DateRange from "./DateRange";
+import { iTask } from "../../dataStructures";
+import DateRange from "../DateRange/DateRange";
+import "./EditPopup.scss";
 
+interface iEditPopupProps {
+  close: any;
+  editTask: any;
+  task: iTask;
+}
 
-export default function EditPopup(props) {
-  const [data, setData] = useState(props.task)
+function EditPopup(props: iEditPopupProps) {
+  const [data, setData] = useState(props.task);
 
-  function handleSubmit(e) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     props.editTask(data);
     console.log(data.name);
-    setData({...data, name: ""});
-    props.close()
+    setData({ ...data, name: "" });
+    props.close();
   }
 
-  function handleChange(e) {
-    setData({...data, name: e.target.value});
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setData({ ...data, name: e.target.value });
   }
 
-  function changeDateIn(date) {
-    setData({...data, dateIn: date})
+  function changeDateIn(date: Date) {
+    setData({ ...data, dateIn: date });
   }
 
-  function changeDateOut(date) {
-    setData({...data, dateOut: date})
+  function changeDateOut(date: Date) {
+    setData({ ...data, dateOut: date });
   }
 
-  function changeDesc(e) {
-    setData({...data, desc: e.target.value})
+  function changeDesc(e: React.ChangeEvent<HTMLTextAreaElement>) {
+    setData({ ...data, desc: e.target.value });
   }
 
   return (
@@ -55,20 +62,20 @@ export default function EditPopup(props) {
           </div>
           <div className="Popup__Row Popup__Desc">
             <div className="Popup__Key">Описание:</div>
-            <textarea
-              className="Popup__Input"
-              name="text"
-              autoComplete="off"
-              value={data.desc}
-              onChange={changeDesc}
-            />
+            <textarea className="Popup__Input" name="text" autoComplete="off" value={data.desc} onChange={changeDesc} />
           </div>
         </div>
         <div className="Popup__Footer">
-          <button type="submit" className="Popup__Btn Btn">Сохранить</button>
-          <div className="Popup__Btn Btn" onClick={props.close}>Отмена</div>
+          <button type="submit" className="Popup__Btn Btn">
+            Сохранить
+          </button>
+          <div className="Popup__Btn Btn" onClick={props.close}>
+            Отмена
+          </div>
         </div>
       </form>
     </div>
-  )
+  );
 }
+
+export default EditPopup;

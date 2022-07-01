@@ -1,0 +1,61 @@
+.Task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 2px 2px 10px #fed6bc;
+  padding: 25px 40px;
+  font-size: 20px;
+  border-radius: 5px;
+  gap: 18px;
+  background-color: #fffbe7;
+  transition: 300ms;
+  transition-timing-function: ease-in;
+  animation: rising 1s forwards;
+
+  &_Completed {
+    background-color: #eeeeee;
+    box-shadow: 2px 2px 10px #cccccc;
+    transition: 300ms;
+    transition-timing-function: ease-in;
+  }
+  &_Fade {
+    animation: fade 1s forwards;
+  }
+  &__Chb {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #fed6bc;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 40px 0 0;
+  }
+  &__Dates {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  &__Subject {
+    flex: 1;
+    text-align: center;
+  }
+  &__Del {
+    font-weight: 300;
+  }
+}
+
+@keyframes rising {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

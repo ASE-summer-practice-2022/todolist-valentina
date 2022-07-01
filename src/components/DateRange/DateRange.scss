@@ -1,0 +1,21 @@
+.DateRange {
+  flex: 3;
+  display: flex;
+  align-items: center;
+  position: relative;
+  gap: 15px;
+
+  &__Icon {
+    cursor: pointer;
+    color: #d89569;
+  }
+  &__Calendar {
+    position: absolute;
+    z-index: 1;
+    top: 20px;
+    left: 15px;
+  }
+  &__Date {
+    font-size: 20px;
+  }
+}
