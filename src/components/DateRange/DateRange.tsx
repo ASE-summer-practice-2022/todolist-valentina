@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./DateRange.scss";
 
 interface iDateRangeProps {
   date: Date;
+  name: string;
   onChange: any;
 }
 
-function DateRange(props: iDateRangeProps) {
+function DateRange({ date, name, onChange }: iDateRangeProps) {
   const [isHovering, setIsHovering] = useState(false);
 
   const handleMouseOver = () => {
@@ -19,8 +20,14 @@ function DateRange(props: iDateRangeProps) {
     setIsHovering(false);
   };
 
-  const onChange = (date: Date) => {
-    props.onChange(date);
+  const onChangeHandler = (value: Date) => {
+    const e = {
+      target: {
+        value,
+        name,
+      },
+    };
+    onChange(e);
     setIsHovering(false);
   };
 
@@ -31,10 +38,10 @@ function DateRange(props: iDateRangeProps) {
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}
       >
-        {isHovering && <Calendar className="DateRange__Calendar" onChange={onChange} value={props.date} />}
+        {isHovering && <Calendar className="DateRange__Calendar" onChange={onChangeHandler} value={date} />}
         date_range
       </div>
-      {props.date && <div className="DateRange__Date">{new Date(props.date).toLocaleDateString("ru-RU")}</div>}
+      {date && <div className="DateRange__Date">{new Date(date).toLocaleDateString("ru-RU")}</div>}
     </div>
   );
 }

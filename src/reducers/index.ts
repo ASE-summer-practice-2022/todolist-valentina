@@ -1,8 +1,7 @@
-import { combineReducers } from "@reduxjs/toolkit";
-import todo from "./todo";
+import todoReducer from "./todoReducer";
 
-const index = combineReducers({
-  todo,
-});
+const rootReducer = {
+  todoList: todoReducer,
+};
 
-export default index;
+export default rootReducer;

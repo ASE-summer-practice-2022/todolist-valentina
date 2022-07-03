@@ -2,14 +2,14 @@
   min-height: 100vh;
   width: 100%;
   background: #fffadd;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url("imgs/pen.png");
+  background-image: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url("assets/imgs/pen.png");
   font-family: "Yanone Kaffeesatz", sans-serif;
   font-weight: 300;
   color: rgb(48, 48, 48);
 
   &__Header {
     background: #fed6bc;
-    background-image: url("imgs/inc-spots.png");
+    background-image: url("assets/imgs/inc-spots.png");
     background-position: 65% 65%;
     background-repeat: no-repeat;
   }
@@ -20,7 +20,7 @@
     align-items: center;
     padding: 20px 0;
   }
-  &__Header-Add {
+  &__Header-Create {
     font-size: 76px !important;
     color: #fffadd;
     transition: 300ms;
