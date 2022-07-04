@@ -1,9 +1,9 @@
-import { ADD_TASK, CLEAR_TASKS, EDIT_TASK, REMOVE_TASK, SET_CURRENT_ID } from "../actions/constants";
-import { iAction, iState, iTask } from "../types";
+import { ADD_TASK, CLEAR_TASKS, EDIT_TASK, REMOVE_TASK, SET_CURRENT_ID } from "../constants";
+import { iAction, iTask } from "../types";
 
 const initialState: any = [];
 
-export default (state = initialState, action: iAction) => {
+export default function todoReducers(state = initialState, action: iAction) {
   switch (action.type) {
     case REMOVE_TASK:
       return {
@@ -43,4 +43,4 @@ export default (state = initialState, action: iAction) => {
     default:
       return state;
   }
-};
+}

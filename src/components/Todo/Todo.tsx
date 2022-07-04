@@ -1,6 +1,6 @@
 import classnames from "classnames";
 import { useContext, useState } from "react";
-import { EDIT_TASK, REMOVE_TASK, SET_CURRENT_ID } from "../../actions/constants";
+import { EDIT_TASK, REMOVE_TASK, SET_CURRENT_ID } from "../../constants";
 import { TaskContext } from "../../helpers/GlobalState";
 import { iTask } from "../../types";
 import "./Todo.scss";
@@ -18,7 +18,7 @@ function Todo({ id, name, dateIn, dateOut, completed }: iTodoProps) {
   const [fade, setFade] = useState(false);
 
   const toggleTaskCompleted = (id: string) => {
-    const updatedTask = { ...tasks.find((task: iTask) => id === task.id)! };
+    const updatedTask = { ...tasks.find((task: iTask) => id === task.id) };
     updatedTask.completed = !updatedTask.completed;
     dispatch({ type: EDIT_TASK, payload: updatedTask });
   };

@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
-import { ADD_TASK, EDIT_TASK, SET_CURRENT_ID } from "../../actions/constants";
+import { ADD_TASK, EDIT_TASK, SET_CURRENT_ID } from "../../constants";
 import { TaskContext } from "../../helpers/GlobalState";
 import { useForm } from "../../helpers/useForm";
-import { iTask } from "../../types";
 import DateRange from "../DateRange/DateRange";
 import "./Popup.scss";
 
@@ -34,11 +33,11 @@ function Popup() {
         <div className="Popup__Body">
           <div className="Popup__Row">
             <div className="Popup__Key">Дата выдачи:</div>
-            <DateRange onChange={setValues} name="dateIn" date={new Date(values.dateIn || null)} />
+            <DateRange onChange={setValues} name="dateIn" date={new Date(values.dateIn)} />
           </div>
           <div className="Popup__Row">
             <div className="Popup__Key">Дата сдачи:</div>
-            <DateRange onChange={setValues} name="dateOut" date={new Date(values.dateOut || null)} />
+            <DateRange onChange={setValues} name="dateOut" date={new Date(values.dateOut)} />
           </div>
           <div className="Popup__Row">
             <div className="Popup__Key">Тема:</div>

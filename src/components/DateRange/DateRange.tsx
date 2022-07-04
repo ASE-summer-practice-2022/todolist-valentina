@@ -20,7 +20,7 @@ function DateRange({ date, name, onChange }: iDateRangeProps) {
     setIsHovering(false);
   };
 
-  const onChangeHandler = (value: Date) => {
+  const handleChange = (value: Date) => {
     const e = {
       target: {
         value,
@@ -38,10 +38,10 @@ function DateRange({ date, name, onChange }: iDateRangeProps) {
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}
       >
-        {isHovering && <Calendar className="DateRange__Calendar" onChange={onChangeHandler} value={date} />}
+        {isHovering && <Calendar className="DateRange__Calendar" onChange={handleChange} value={date} />}
         date_range
       </div>
-      {date && <div className="DateRange__Date">{new Date(date).toLocaleDateString("ru-RU")}</div>}
+      <div className="DateRange__Date">{new Date(date).toLocaleDateString("ru-RU")}</div>
     </div>
   );
 }

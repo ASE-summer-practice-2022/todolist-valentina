@@ -1,16 +1,15 @@
 import { useContext, useEffect } from "react";
-import { CLEAR_TASKS, SET_CURRENT_ID } from "./actions/constants";
 import "./App.scss";
 import { ReactComponent as StarsSvg } from "./assets/imgs/stars.svg";
 import Popup from "./components/Popup/Popup";
 import Todo from "./components/Todo/Todo";
+import { CLEAR_TASKS, SET_CURRENT_ID } from "./constants";
 import { TaskContext } from "./helpers/GlobalState";
 import { iTask } from "./types";
 
 function App() {
   const { tasks, currentId, dispatch } = useContext(TaskContext);
-
-  const taskList = tasks.map((task: iTask) => <Todo {...task} key={task.id} />);
+  const taskList = tasks.map((task: iTask) => <Todo key={task.id} {...task} />);
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(tasks));
