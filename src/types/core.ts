@@ -1,4 +1,4 @@
-export interface iTask {
+export interface ITask {
   id: string;
   name: string;
   dateIn: string | Date;
@@ -7,15 +7,15 @@ export interface iTask {
   completed: boolean;
 }
 
-export interface iState {
-  tasks: iTask[];
+export interface IState {
+  tasks: ITask[];
   removeTask?: any;
   addTask?: any;
   editTask?: any;
   clearTasks?: any;
 }
 
-export interface iAction {
+export interface IAction {
   type: string;
   payload: any;
 }

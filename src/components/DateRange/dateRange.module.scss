@@ -1,21 +1,24 @@
-.DateRange {
+@import "../../scss/core";
+@import "../../scss/colors";
+
+.dateRange {
   flex: 3;
   display: flex;
   align-items: center;
   position: relative;
   gap: 15px;
 
-  &__Icon {
+  .icon {
     cursor: pointer;
-    color: #d89569;
+    color: $light-orange;
   }
-  &__Calendar {
+  .calendar {
     position: absolute;
     z-index: 1;
     top: 20px;
     left: 15px;
   }
-  &__Date {
+  .date {
     font-size: 20px;
   }
 }

@@ -1,25 +1,21 @@
+import classnames from "classnames";
 import { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import "./DateRange.scss";
+import { parseDate } from "../../helpers/date";
+import styles from "./dateRange.module.scss";
 
-interface iDateRangeProps {
-  date: Date;
+interface IDateRangeProps {
+  date: string | Date;
   name: string;
   onChange: any;
 }
 
-function DateRange({ date, name, onChange }: iDateRangeProps) {
-  const [isHovering, setIsHovering] = useState(false);
+function DateRange({ date, name, onChange }: IDateRangeProps) {
+  const [isHover, setIsHover] = useState(false);
 
-  const handleMouseOver = () => {
-    setIsHovering(true);
-  };
-
-  const handleMouseOut = () => {
-    setIsHovering(false);
-  };
-
+  const handleMouseOver = () => setIsHover(true);
+  const handleMouseOut = () => setIsHover(false);
   const handleChange = (value: Date) => {
     const e = {
       target: {
@@ -28,20 +24,20 @@ function DateRange({ date, name, onChange }: iDateRangeProps) {
       },
     };
     onChange(e);
-    setIsHovering(false);
+    setIsHover(false);
   };
 
   return (
-    <div className="DateRange">
+    <div className={styles.dateRange}>
       <div
-        className="material-symbols-outlined DateRange__Icon"
+        className={classnames(styles.icon, styles.materialSymbols)}
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}
       >
-        {isHovering && <Calendar className="DateRange__Calendar" onChange={handleChange} value={date} />}
+        {isHover && <Calendar className={styles.calendar} onChange={handleChange} value={new Date(date)} />}
         date_range
       </div>
-      <div className="DateRange__Date">{new Date(date).toLocaleDateString("ru-RU")}</div>
+      <div className={styles.date}>{parseDate(date)}</div>
     </div>
   );
 }

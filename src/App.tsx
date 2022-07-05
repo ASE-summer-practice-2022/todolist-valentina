@@ -1,38 +1,40 @@
+import classnames from "classnames";
 import { useContext, useEffect } from "react";
-import "./App.scss";
+import styles from "./app.module.scss";
 import { ReactComponent as StarsSvg } from "./assets/imgs/stars.svg";
-import Popup from "./components/Popup/Popup";
-import Todo from "./components/Todo/Todo";
-import { CLEAR_TASKS, SET_CURRENT_ID } from "./constants";
-import { TaskContext } from "./helpers/GlobalState";
-import { iTask } from "./types";
+import Popup from "./components/Popup";
+import Todo from "./components/Todo";
+import { TASK_STATE } from "./constants";
+import { TaskContext } from "./helpers/globalState";
+import { ITask } from "./types/core";
 
 function App() {
   const { tasks, currentId, dispatch } = useContext(TaskContext);
-  const taskList = tasks.map((task: iTask) => <Todo key={task.id} {...task} />);
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(tasks));
   }, [tasks]);
 
+  const taskList = tasks.map((task: ITask) => <Todo key={task.id} {...task} />);
+
+  const openPopup = () => dispatch({ type: TASK_STATE.SET_CURRENT_ID, payload: 0 });
+  const clearTasks = () => dispatch({ type: TASK_STATE.CLEAR_TASKS });
+
   return (
-    <div className="App">
+    <div className={styles.app}>
       {currentId !== -1 && <Popup />}
-      <header className="App__Header">
-        <div className="App__Header-Content">
-          <div
-            className="material-symbols-outlined App__Header-Create"
-            onClick={() => dispatch({ type: SET_CURRENT_ID, payload: 0 })}
-          >
+      <header className={styles.header}>
+        <div className={styles.headerContent}>
+          <div className={classnames(styles.materialSymbols, styles.headerCreate)} onClick={openPopup}>
             add
           </div>
-          <h1 className="App__Header-Head">СПИСОК ЗАДАЧ НА ПРАКТИКУ</h1>
-          <StarsSvg className="App__Header-Clear" onClick={() => dispatch({ type: CLEAR_TASKS })} />
+          <h1 className={styles.headerHead}>СПИСОК ЗАДАЧ НА ПРАКТИКУ</h1>
+          <StarsSvg className={styles.headerClear} onClick={clearTasks} />
         </div>
       </header>
 
-      <main className="App__Content">
-        <ul className="App__Content-Tasks">{taskList}</ul>
+      <main className={styles.content}>
+        <ul className={styles.contentTasks}>{taskList}</ul>
       </main>
     </div>
   );

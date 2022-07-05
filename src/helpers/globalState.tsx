@@ -1,28 +1,28 @@
 import React, { createContext, useReducer } from "react";
 import todoReducer from "../reducers/todoReducer";
-import { iTask } from "../types";
+import { ITask } from "../types/core";
 
-interface iContextProps {
+interface IContextProps {
   dispatch?: any;
 }
 
-interface iTaskContextProps extends iContextProps {
-  tasks: iTask[];
+interface ITaskContextProps extends IContextProps {
+  tasks: ITask[];
   currentId: number | string;
 }
 
-const initialState: iTaskContextProps = {
-  tasks: JSON.parse(localStorage.getItem("todos") || "{}") || [],
+const initialState: ITaskContextProps = {
+  tasks: JSON.parse(localStorage.getItem("todos") || "[]"),
   currentId: -1,
 };
 
 export const TaskContext = createContext(initialState);
 
-interface iProviderProps {
+interface IProviderProps {
   children: React.ReactNode;
 }
 
-export const Provider = ({ children }: iProviderProps) => {
+export const Provider = ({ children }: IProviderProps) => {
   const [state, dispatch] = useReducer(todoReducer, initialState);
 
   return (

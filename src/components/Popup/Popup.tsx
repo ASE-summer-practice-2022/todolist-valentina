@@ -1,59 +1,59 @@
+import classnames from "classnames";
 import React, { useContext } from "react";
-import { ADD_TASK, EDIT_TASK, SET_CURRENT_ID } from "../../constants";
-import { TaskContext } from "../../helpers/GlobalState";
-import { useForm } from "../../helpers/useForm";
-import DateRange from "../DateRange/DateRange";
-import "./Popup.scss";
+import { TASK_STATE } from "../../constants";
+import { parseDate, today, tomorrow } from "../../helpers/date";
+import { TaskContext } from "../../helpers/globalState";
+import { useForm } from "../../hooks/useForm";
+import Button from "../Button";
+import DateRange from "../DateRange";
+import styles from "./popup.module.scss";
 
 function Popup() {
   const { tasks, currentId, dispatch } = useContext(TaskContext);
   const initialState = tasks.find((task) => task.id === currentId) || {
-    dateIn: new Date(),
-    dateOut: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
+    dateIn: today,
+    dateOut: tomorrow,
   };
   const [values, setValues] = useForm(initialState);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const close = () => dispatch({ type: TASK_STATE.SET_CURRENT_ID, payload: -1 });
+  const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (values.name) {
-      dispatch({ type: currentId ? EDIT_TASK : ADD_TASK, payload: values });
-      handleClose();
+      dispatch({ type: currentId ? TASK_STATE.EDIT_TASK : TASK_STATE.ADD_TASK, payload: values });
+      close();
     }
   };
 
-  const handleClose = () => {
-    dispatch({ type: SET_CURRENT_ID, payload: -1 });
-  };
-
   return (
-    <div className="Popup">
-      <div className="Popup__Overlay" onClick={handleClose}></div>
-      <form className="Popup__Form" onSubmit={handleSubmit}>
-        <div className="Popup__Body">
-          <div className="Popup__Row">
-            <div className="Popup__Key">Дата выдачи:</div>
-            <DateRange onChange={setValues} name="dateIn" date={new Date(values.dateIn)} />
+    <div className={styles.popup}>
+      <div className={styles.overlay} onClick={close}></div>
+      <form className={styles.form} onSubmit={submit}>
+        <div className={styles.body}>
+          <div className={styles.row}>
+            <div className={styles.key}>Дата выдачи:</div>
+            <DateRange onChange={setValues} name="dateIn" date={parseDate(values.dateIn)} />
           </div>
-          <div className="Popup__Row">
-            <div className="Popup__Key">Дата сдачи:</div>
-            <DateRange onChange={setValues} name="dateOut" date={new Date(values.dateOut)} />
+          <div className={styles.row}>
+            <div className={styles.key}>Дата сдачи:</div>
+            <DateRange onChange={setValues} name="dateOut" date={parseDate(values.dateOut)} />
           </div>
-          <div className="Popup__Row">
-            <div className="Popup__Key">Тема:</div>
+          <div className={styles.row}>
+            <div className={styles.key}>Тема:</div>
             <input
               type="text"
-              className="Popup__Input"
+              className={styles.input}
               name="name"
               autoComplete="off"
               value={values.name}
               onChange={setValues}
             />
           </div>
-          <div className="Popup__Row Popup__Desc">
-            <div className="Popup__Key">Описание:</div>
+          <div className={classnames(styles.row, styles.desc)}>
+            <div className={styles.key}>Описание:</div>
             <textarea
-              className="Popup__Input"
+              className={styles.input}
               name="desc"
               autoComplete="off"
               value={values.desc}
@@ -61,13 +61,11 @@ function Popup() {
             />
           </div>
         </div>
-        <div className="Popup__Footer">
-          <button type="submit" className="Popup__Btn Btn">
-            {currentId ? "Сохранить" : "Создать"}
-          </button>
-          <div className="Popup__Btn Btn" onClick={handleClose}>
+        <div className={styles.footer}>
+          <Button type="submit">{currentId ? "Сохранить" : "Создать"}</Button>
+          <Button type="button" onClick={close}>
             Отмена
-          </div>
+          </Button>
         </div>
       </form>
     </div>

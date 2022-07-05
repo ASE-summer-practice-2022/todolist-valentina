@@ -1,5 +1,25 @@
-@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
-@import url("https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@300;400&display=swap");
+@import "./scss/colors";
+
+@font-face {
+  font-family: "Yanone Kaffeesatz";
+  font-style: normal;
+  font-weight: 300;
+  src: url(assets/fonts/YanoneKaffeesatz-Light.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Yanone Kaffeesatz";
+  font-style: normal;
+  font-weight: 400;
+  src: url(assets/fonts/YanoneKaffeesatz-Regular.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Material Symbols Outlined";
+  font-style: normal;
+  font-weight: 400;
+  src: url(assets/fonts/MaterialSymbols-Outlined.woff2) format("woff2");
+}
 
 body {
   margin: 0;
@@ -18,35 +38,11 @@ input,
 textarea {
   font-family: "Yanone Kaffeesatz", sans-serif;
   letter-spacing: 0.5px;
-  color: rgb(48, 48, 48);
+  color: $dirty-brown;
   font-size: 20px;
 }
 
 input,
 textarea {
   font-weight: 300;
-}
-
-.Btn {
-  font-size: 20px;
-  background-color: #fffadd;
-  border: 2px solid #fed6bc;
-  padding: 15px 50px;
-  border-radius: 5px;
-  transition: 300ms;
-  transition-timing-function: ease-in;
-
-  &:hover {
-    cursor: pointer;
-    background-color: #fed6bc;
-    transition: 300ms;
-    transition-timing-function: ease-in;
-  }
-  &_Completed {
-    background-color: #eeeeee;
-    border: 2px solid #cccccc;
-  }
-  &_Completed:hover {
-    background-color: #cccccc;
-  }
 }

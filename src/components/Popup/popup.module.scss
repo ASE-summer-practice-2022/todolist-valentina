@@ -1,15 +1,17 @@
-.Popup {
+@import "../../scss/colors";
+
+.popup {
   position: absolute;
   width: 100%;
   height: 100%;
   z-index: 99;
 
-  &__Overlay {
-    background-color: rgba(0, 0, 0, 0.3);
+  .overlay {
+    background-color: $black;
     width: 100%;
     height: 100%;
   }
-  &__Form {
+  .form {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -19,32 +21,32 @@
     min-height: 400px;
     top: 25%;
     left: 25%;
-    background-color: #ffffe0;
+    background-color: $light-yellow;
     border-radius: 25px;
     padding: 50px;
     box-sizing: border-box;
   }
-  &__Body {
+  .body {
     display: flex;
     flex-direction: column;
     gap: 20px;
     flex: 1;
   }
-  &__Row {
+  .row {
     display: flex;
   }
-  &__Key {
+  .key {
     flex: 1;
     font-size: 20px;
   }
-  &__Value {
+  .value {
     flex: 3;
   }
-  &__Input {
+  .input {
     flex: 3;
     resize: none;
-    background-color: #ffffe0;
-    border: 2px solid #fed6bc;
+    background-color: $light-yellow;
+    border: 2px solid $peach;
     border-radius: 5px;
     padding: 8px 15px;
 
@@ -52,10 +54,10 @@
       outline: none;
     }
   }
-  &__Desc {
+  .desc {
     flex: 1;
   }
-  &__Footer {
+  .footer {
     display: flex;
     gap: 20px;
     justify-content: flex-end;
