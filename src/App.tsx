@@ -1,28 +1,29 @@
 import classnames from "classnames";
-import { useContext, useEffect } from "react";
+import { autorun } from "mobx";
+import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
 import styles from "./app.module.scss";
 import { ReactComponent as StarsSvg } from "./assets/imgs/stars.svg";
 import Popup from "./components/Popup";
 import Todo from "./components/Todo";
-import { TASK_STATE } from "./constants";
-import { TaskContext } from "./helpers/globalState";
-import { ITask } from "./types/core";
+import { useStore } from "./hooks/useStore";
+import { ITodo } from "./models/core";
 
 function App() {
-  const { tasks, currentId, dispatch } = useContext(TaskContext);
+  const { todoStore } = useStore();
 
   useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(tasks));
-  }, [tasks]);
+    autorun(() => localStorage.setItem("todos", JSON.stringify(todoStore.todos)));
+  }, [todoStore.todos]);
 
-  const taskList = tasks.map((task: ITask) => <Todo key={task.id} {...task} />);
+  const taskList = todoStore.todos.map((task: ITodo) => <Todo key={task.id} {...task} />);
 
-  const openPopup = () => dispatch({ type: TASK_STATE.SET_CURRENT_ID, payload: 0 });
-  const clearTasks = () => dispatch({ type: TASK_STATE.CLEAR_TASKS });
+  const openPopup = () => todoStore.setCurrentId(0);
+  const clearTasks = () => todoStore.clearTasks();
 
   return (
     <div className={styles.app}>
-      {currentId !== -1 && <Popup />}
+      {todoStore.currentId !== -1 && <Popup />}
       <header className={styles.header}>
         <div className={styles.headerContent}>
           <div className={classnames(styles.materialSymbols, styles.headerCreate)} onClick={openPopup}>
@@ -40,4 +41,4 @@ function App() {
   );
 }
 
-export default App;
+export default observer(App);

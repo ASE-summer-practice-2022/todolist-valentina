@@ -1,36 +1,9 @@
-@import "./scss/colors";
-
-@font-face {
-  font-family: "Yanone Kaffeesatz";
-  font-style: normal;
-  font-weight: 300;
-  src: url(assets/fonts/YanoneKaffeesatz-Light.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Yanone Kaffeesatz";
-  font-style: normal;
-  font-weight: 400;
-  src: url(assets/fonts/YanoneKaffeesatz-Regular.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Material Symbols Outlined";
-  font-style: normal;
-  font-weight: 400;
-  src: url(assets/fonts/MaterialSymbols-Outlined.woff2) format("woff2");
-}
+@import "./styles/colors";
+@import "./styles/fonts";
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-    "Droid Sans", "Helvetica Neue", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: "Yanone Kaffeesatz", sans-serif;
 }
 
 button,

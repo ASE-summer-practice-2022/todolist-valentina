@@ -1,27 +1,27 @@
 import classnames from "classnames";
-import React, { useContext } from "react";
-import { TASK_STATE } from "../../constants";
+import { observer } from "mobx-react-lite";
 import { parseDate, today, tomorrow } from "../../helpers/date";
-import { TaskContext } from "../../helpers/globalState";
 import { useForm } from "../../hooks/useForm";
+import { useStore } from "../../hooks/useStore";
 import Button from "../Button";
 import DateRange from "../DateRange";
 import styles from "./popup.module.scss";
 
 function Popup() {
-  const { tasks, currentId, dispatch } = useContext(TaskContext);
-  const initialState = tasks.find((task) => task.id === currentId) || {
+  const { todoStore } = useStore();
+  const initialState = todoStore.todos.find((task) => task.id === todoStore.currentId) || {
     dateIn: today,
     dateOut: tomorrow,
   };
   const [values, setValues] = useForm(initialState);
 
-  const close = () => dispatch({ type: TASK_STATE.SET_CURRENT_ID, payload: -1 });
+  const close = () => todoStore.setCurrentId(-1);
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (values.name) {
-      dispatch({ type: currentId ? TASK_STATE.EDIT_TASK : TASK_STATE.ADD_TASK, payload: values });
+      if (todoStore.currentId) todoStore.updateTodo(values);
+      else todoStore.addTodo(values);
       close();
     }
   };
@@ -62,7 +62,7 @@ function Popup() {
           </div>
         </div>
         <div className={styles.footer}>
-          <Button type="submit">{currentId ? "Сохранить" : "Создать"}</Button>
+          <Button type="submit">{todoStore.currentId ? "Сохранить" : "Создать"}</Button>
           <Button type="button" onClick={close}>
             Отмена
           </Button>
@@ -72,4 +72,4 @@ function Popup() {
   );
 }
 
-export default Popup;
+export default observer(Popup);

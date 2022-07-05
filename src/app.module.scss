@@ -1,12 +1,11 @@
-@import "./scss/core";
-@import "./scss/colors";
+@import "./styles/core";
+@import "./styles/colors";
 
 .app {
   min-height: 100vh;
   width: 100%;
   background: $lemon-cream;
   background-image: linear-gradient($dark-grey, $dark-grey), url("assets/imgs/pen.png");
-  font-family: "Yanone Kaffeesatz", sans-serif;
   font-weight: 300;
   color: $dirty-brown;
 
