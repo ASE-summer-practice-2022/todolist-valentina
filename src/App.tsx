@@ -8,6 +8,8 @@ import { TASK_STATE } from "./constants";
 import { TaskContext } from "./helpers/globalState";
 import { ITask } from "./types/core";
 
+
+
 function App() {
   const { tasks, currentId, dispatch } = useContext(TaskContext);
 
