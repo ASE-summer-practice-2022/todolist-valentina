@@ -1,4 +1,5 @@
-export const chb: string;
+export const btn: string;
+export const checkbox: string;
 export const completed: string;
 export const dates: string;
 export const del: string;

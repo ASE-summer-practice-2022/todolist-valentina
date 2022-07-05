@@ -29,6 +29,7 @@ function DateRange({ date, name, onChange }: IDateRangeProps) {
 
   return (
     <div className={styles.dateRange}>
+      <div className={styles.date}>{parseDate(date)}</div>
       <div
         className={classnames(styles.icon, styles.materialSymbols)}
         onMouseOver={handleMouseOver}
@@ -37,7 +38,6 @@ function DateRange({ date, name, onChange }: IDateRangeProps) {
         {isHover && <Calendar className={styles.calendar} onChange={handleChange} value={new Date(date)} />}
         date_range
       </div>
-      <div className={styles.date}>{parseDate(date)}</div>
     </div>
   );
 }

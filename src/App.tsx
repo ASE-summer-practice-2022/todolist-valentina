@@ -7,7 +7,7 @@ import { ReactComponent as StarsSvg } from "./assets/imgs/stars.svg";
 import Popup from "./components/Popup";
 import Todo from "./components/Todo";
 import { useStore } from "./hooks/useStore";
-import { ITodo } from "./models/core";
+import { Task } from "./models/Task";
 
 function App() {
   const { todoStore } = useStore();
@@ -16,7 +16,7 @@ function App() {
     autorun(() => localStorage.setItem("todos", JSON.stringify(todoStore.todos)));
   }, [todoStore.todos]);
 
-  const taskList = todoStore.todos.map((task: ITodo) => <Todo key={task.id} {...task} />);
+  const taskList = todoStore.todos.map((task: Task) => <Todo key={task.id} {...task} />);
 
   const openPopup = () => todoStore.setCurrentId(0);
   const clearTasks = () => todoStore.clearTasks();

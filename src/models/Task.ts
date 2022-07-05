@@ -1,4 +1,4 @@
-export class ITodo {
+export class Task {
   id: string;
   name: string;
   dateIn: string | Date;

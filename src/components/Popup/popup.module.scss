@@ -6,6 +6,8 @@
   height: 100%;
   z-index: 99;
 
+  @import "../../styles/button";
+  @import "../../styles/textinput";
   .overlay {
     background-color: $black;
     width: 100%;
@@ -41,18 +43,6 @@
   }
   .value {
     flex: 3;
-  }
-  .input {
-    flex: 3;
-    resize: none;
-    background-color: $light-yellow;
-    border: 2px solid $peach;
-    border-radius: 5px;
-    padding: 8px 15px;
-
-    &:focus-visible {
-      outline: none;
-    }
   }
   .desc {
     flex: 1;

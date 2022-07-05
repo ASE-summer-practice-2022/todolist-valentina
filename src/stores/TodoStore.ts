@@ -1,9 +1,9 @@
 import { action, makeObservable, observable } from "mobx";
 import { v4 as uuidv4 } from "uuid";
-import { ITodo } from "../models/core";
+import { Task } from "../models/Task";
 
 export class TodoStore {
-  @observable todos: ITodo[];
+  @observable todos: Task[];
   @observable currentId: number | string;
 
   constructor() {
@@ -12,14 +12,14 @@ export class TodoStore {
     this.currentId = -1;
   }
 
-  @action addTodo = (todo: ITodo) => {
+  @action addTodo = (todo: Task) => {
     this.todos.push({ ...todo, id: uuidv4(), completed: false });
   };
   @action deleteTodo = (id: string) => {
     const updatedTodos = this.todos.filter((todo) => todo.id !== id);
     this.todos = updatedTodos;
   };
-  @action updateTodo = (updatedTodo: ITodo) => {
+  @action updateTodo = (updatedTodo: Task) => {
     const updateTodos = this.todos.map((todo) => (todo.id === updatedTodo.id ? updatedTodo : todo));
     this.todos = updateTodos;
   };
