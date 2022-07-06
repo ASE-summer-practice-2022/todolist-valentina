@@ -9,8 +9,6 @@ import Todo from "./components/Todo";
 import { useStore } from "./hooks/useStore";
 import { Task } from "./models/Task";
 
-
-
 function App() {
   const { todoStore } = useStore();
 
