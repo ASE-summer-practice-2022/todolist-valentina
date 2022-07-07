@@ -15,6 +15,7 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(tasks));
+    // HELLO_WORLD
   }, [tasks]);
 
   const taskList = tasks.map((task: ITask) => <Todo key={task.id} {...task} />);
