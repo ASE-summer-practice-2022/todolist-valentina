@@ -1,29 +1,27 @@
-@import "styles/colors";
-@import "styles/fonts";
+@import "./styles/colors";
+@import "./styles/fonts";
+@import "./styles/light-theme";
 
-
+html,
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-    "Droid Sans", "Helvetica Neue", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: "Yanone Kaffeesatz", sans-serif !important;
+  font-weight: 300 !important;
+  color: $dirty-brown;
 }
 
 button,
+label,
 input,
 textarea {
-  font-family: "Yanone Kaffeesatz", sans-serif;
+  font-family: "Yanone Kaffeesatz", sans-serif !important;
   letter-spacing: 0.5px;
   color: $dirty-brown;
-  font-size: 20px;
+  font-size: 20px !important;
 }
 
 input,
+label,
 textarea {
-  font-weight: 300;
+  font-weight: 300 !important;
 }

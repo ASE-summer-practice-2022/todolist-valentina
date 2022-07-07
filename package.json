@@ -2,10 +2,16 @@
   "name": "react-todo",
   "version": "0.1.0",
   "private": true,
-  "prettier": {
-    "printWidth": 120
-  },
   "dependencies": {
+    "@date-io/date-fns": "^2.14.0",
+    "@date-io/dayjs": "^2.14.0",
+    "@date-io/luxon": "^2.14.0",
+    "@date-io/moment": "^2.14.0",
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/material": "^5.8.7",
+    "@mui/x-date-pickers-pro": "^5.0.0-alpha.7",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
@@ -15,7 +21,9 @@
     "@types/react-calendar": "^3.5.1",
     "@types/react-dom": "^18.0.5",
     "classnames": "^2.3.1",
-    "node-sass": "^7.0.1",
+    "date-fns": "^2.28.0",
+    "mobx": "^6.6.1",
+    "mobx-react": "^7.5.1",
     "react": "^18.2.0",
     "react-calendar": "^3.7.0",
     "react-dom": "^18.2.0",
@@ -23,9 +31,24 @@
     "typescript": "^4.7.4",
     "uuid": "^8.3.2"
   },
+  "devDependencies": {
+    "@babel/eslint-plugin": "^7.17.7",
+    "@types/uuid": "^8.3.4",
+    "@typescript-eslint/eslint-plugin": "^5.30.5",
+    "@typescript-eslint/parser": "^5.30.5",
+    "eslint": "^8.19.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-jest": "^26.5.3",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "node-sass": "^7.0.1",
+    "typed-scss-modules": "^6.5.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "ts:scss": "typed-scss-modules src",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -46,8 +69,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@types/uuid": "^8.3.4"
   }
 }

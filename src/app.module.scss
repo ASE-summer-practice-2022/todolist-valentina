@@ -1,72 +1,7 @@
-@import "styles/core";
-@import "styles/colors";
+@import "./styles/colors";
 
 .app {
   min-height: 100vh;
-  width: 100%;
   background: $lemon-cream;
   background-image: linear-gradient($dark-grey, $dark-grey), url("assets/imgs/pen.png");
-  font-family: "Yanone Kaffeesatz", sans-serif;
-  font-weight: 300;
-  color: $dirty-brown;
-
-  .header {
-    background: $peach;
-    background-image: url("assets/imgs/inc-spots.png");
-    background-position: 65% 65%;
-    background-repeat: no-repeat;
-  }
-  .headerContent {
-    width: 1200px;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    padding: 20px 0;
-  }
-  .headerCreate {
-    font-size: 76px !important;
-    color: $lemon-cream;
-    transition: 300ms;
-    flex: 1 0 auto;
-
-    &:hover {
-      cursor: pointer;
-      color: $peach;
-      text-shadow: 2px 0 0 $lemon-cream, -2px 0 0 $lemon-cream, 0 2px 0 $lemon-cream, 0 -2px 0 $lemon-cream,
-        1px 1px $lemon-cream, -1px -1px 0 $lemon-cream, 1px -1px 0 $lemon-cream, -1px 1px 0 $lemon-cream;
-      transition: 300ms;
-    }
-  }
-  .headerHead {
-    font-size: 30px;
-    font-weight: 400;
-    letter-spacing: 1.5px;
-    text-align: center;
-    flex: 1 1 100%;
-  }
-  .headerClear {
-    font-size: 20px;
-    text-align: center;
-    padding: 0 30px;
-    border-radius: 5px;
-    cursor: pointer;
-    height: 68px;
-    transition: 300ms;
-    flex: 1 0 auto;
-
-    &:hover {
-      transform: scale(1.1);
-      transition: 300ms;
-    }
-  }
-  .content {
-    width: 1200px;
-    margin: auto;
-  }
-  .contentTasks {
-    padding: 30px 0 0 0;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
 }

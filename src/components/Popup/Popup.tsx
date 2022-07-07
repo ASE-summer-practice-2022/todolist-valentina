@@ -1,75 +1,68 @@
-import classnames from "classnames";
-import React, { useContext } from "react";
-import { TASK_STATE } from "../../constants";
-import { parseDate, today, tomorrow } from "../../helpers/date";
-import { TaskContext } from "../../helpers/globalState";
-import { useForm } from "../../hooks/useForm";
-import Button from "../Button";
-import DateRange from "../DateRange";
-import styles from "./popup.module.scss";
+import { Box, Button, Dialog, DialogActions, DialogContent, Stack, TextField } from "@mui/material";
+import { DateRange, DesktopDateRangePicker, LocalizationProvider } from "@mui/x-date-pickers-pro";
+import { AdapterDateFns } from "@mui/x-date-pickers-pro/AdapterDateFns";
+import { ru } from "date-fns/locale";
+import { observer } from "mobx-react-lite";
+import React from 'react';
+
+import { today, tomorrow } from "../../helpers/date";
+import useForm from "../../hooks/useForm";
+import useStore from "../../hooks/useStore";
 
 function Popup() {
-  const { tasks, currentId, dispatch } = useContext(TaskContext);
-  const initialState = tasks.find((task) => task.id === currentId) || {
-    dateIn: today,
-    dateOut: tomorrow,
-  };
+  const { todoStore } = useStore();
+  const initialState = todoStore.todos.find((task) => task.id === todoStore.currentId) || { terms: [today, tomorrow] };
   const [values, setValues] = useForm(initialState);
 
-  const close = () => dispatch({ type: TASK_STATE.SET_CURRENT_ID, payload: -1 });
-  const submit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const close = () => todoStore.setCurrentId(-1);
+  const updateTerms = (value: DateRange<Date>) => {
+    const e = { target: { name: "terms", value } };
+    setValues(e);
+  };
+  const submit = () => {
     if (values.name) {
-      dispatch({ type: currentId ? TASK_STATE.EDIT_TASK : TASK_STATE.ADD_TASK, payload: values });
+      if (todoStore.currentId) todoStore.updateTodo(values);
+      else todoStore.addTodo(values);
       close();
     }
   };
 
   return (
-    <div className={styles.popup}>
-      <div className={styles.overlay} onClick={close}></div>
-      <form className={styles.form} onSubmit={submit}>
-        <div className={styles.body}>
-          <div className={styles.row}>
-            <div className={styles.key}>Дата выдачи:</div>
-            <DateRange onChange={setValues} name="dateIn" date={parseDate(values.dateIn)} />
-          </div>
-          <div className={styles.row}>
-            <div className={styles.key}>Дата сдачи:</div>
-            <DateRange onChange={setValues} name="dateOut" date={parseDate(values.dateOut)} />
-          </div>
-          <div className={styles.row}>
-            <div className={styles.key}>Тема:</div>
-            <input
-              type="text"
-              className={styles.input}
-              name="name"
-              autoComplete="off"
-              value={values.name}
-              onChange={setValues}
+    <Dialog open={todoStore.currentId !== -1} onClose={close} fullWidth>
+      <DialogContent>
+        <Stack spacing={3} pt={2}>
+          <LocalizationProvider locale={ru} dateAdapter={AdapterDateFns} localeText={{ start: "Выдача", end: "Сдача" }}>
+            <DesktopDateRangePicker
+              value={values.terms}
+              onChange={updateTerms}
+              renderInput={(startProps, endProps) => (
+                <>
+                  <TextField {...startProps} fullWidth />
+                  <Box sx={{ mx: 2 }}> до </Box>
+                  <TextField {...endProps} fullWidth />
+                </>
+              )}
             />
-          </div>
-          <div className={classnames(styles.row, styles.desc)}>
-            <div className={styles.key}>Описание:</div>
-            <textarea
-              className={styles.input}
-              name="desc"
-              autoComplete="off"
-              value={values.desc}
-              onChange={setValues}
-            />
-          </div>
-        </div>
-        <div className={styles.footer}>
-          <Button type="submit">{currentId ? "Сохранить" : "Создать"}</Button>
-          <Button type="button" onClick={close}>
-            Отмена
-          </Button>
-        </div>
-      </form>
-    </div>
+          </LocalizationProvider>
+          <TextField label="Тема" name="name" value={values.name} onChange={setValues} fullWidth />
+          <TextField
+            label="Описание"
+            name="desc"
+            minRows={3}
+            value={values.desc}
+            onChange={setValues}
+            multiline
+            fullWidth
+          />
+        </Stack>
+      </DialogContent>
+
+      <DialogActions>
+        <Button onClick={submit}>{todoStore.currentId ? "Сохранить" : "Создать"}</Button>
+        <Button onClick={close}>Отмена</Button>
+      </DialogActions>
+    </Dialog>
   );
 }
 
-export default Popup;
+export default observer(Popup);

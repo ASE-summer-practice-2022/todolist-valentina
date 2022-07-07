@@ -1,0 +1,75 @@
+@import "colors";
+
+div.MuiTextField-root {
+  & label {
+    color: $dirty-brown;
+    margin-left: 4px;
+
+    &.Mui-focused {
+      color: $light-orange;
+    }
+  }
+  .MuiOutlinedInput-root {
+    & fieldset {
+      border-color: $light-orange;
+    }
+    &:hover fieldset {
+      border-color: $black;
+    }
+    &.Mui-focused fieldset {
+      border-color: $light-orange;
+    }
+  }
+}
+
+div.MuiDialog-paper {
+  & .MuiDialogContent-root {
+    background-color: $light-yellow;
+  }
+  & .MuiDialogActions-root {
+    background-color: beige;
+  }
+}
+
+button.MuiButton-root {
+  color: $light-orange;
+  letter-spacing: 1.2px;
+
+  &.MuiButton-outlined {
+    border-color: $light-orange;
+    padding: 7px 25px;
+  }
+}
+
+span.MuiCheckbox-root {
+  border-radius: 5px;
+
+  & svg {
+    width: 40px;
+    height: 40px;
+    fill: $peach;
+  }
+}
+
+h1.MuiTypography-h1 {
+  font-family: "Yanone Kaffeesatz", sans-serif;
+  font-size: 30px;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+}
+
+header.MuiAppBar-root {
+  background: $peach;
+  background-image: url("../assets/imgs/inc-spots.png");
+  background-position: 65% 65%;
+  background-repeat: no-repeat;
+  color: $dirty-brown;
+  box-shadow: 0 2px 10px #d89c74;
+}
+
+button.MuiFab-root {
+  &.MuiFab-primary {
+    background-color: $light-orange;
+    box-shadow: 1px 3px 10px #d39e7b;
+  }
+}

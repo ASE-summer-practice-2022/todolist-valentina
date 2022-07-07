@@ -1,46 +1,55 @@
-import classnames from "classnames";
-import { useContext, useEffect } from "react";
+import { Add, ClearAll } from "@mui/icons-material";
+import { AppBar, Box, CssBaseline, Fab, Stack, Typography } from "@mui/material";
+import { Container } from "@mui/system";
+import { autorun } from "mobx";
+import { observer } from "mobx-react-lite";
+import React, { useEffect } from "react";
+
 import styles from "./app.module.scss";
-import { ReactComponent as StarsSvg } from "./assets/imgs/stars.svg";
 import Popup from "./components/Popup";
 import Todo from "./components/Todo";
-import { TASK_STATE } from "./constants";
-import { TaskContext } from "./helpers/globalState";
-import { ITask } from "./types/core";
-
-
+import useStore from "./hooks/useStore";
+import Task from "./models/Task";
 
 function App() {
-  const { tasks, currentId, dispatch } = useContext(TaskContext);
+  const { todoStore } = useStore();
 
   useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(tasks));
-    // HELLO_WORLD
-  }, [tasks]);
+    autorun(() => localStorage.setItem("todos", JSON.stringify(todoStore.todos)));
+  }, [todoStore.todos]);
 
-  const taskList = tasks.map((task: ITask) => <Todo key={task.id} {...task} />);
+  const taskList = todoStore.todos.map((task: Task) => <Todo key={task.id} {...task} />);
 
-  const openPopup = () => dispatch({ type: TASK_STATE.SET_CURRENT_ID, payload: 0 });
-  const clearTasks = () => dispatch({ type: TASK_STATE.CLEAR_TASKS });
+  const openPopup = () => todoStore.setCurrentId(0);
+  const clearTasks = () => todoStore.clearTasks();
 
   return (
-    <div className={styles.app}>
-      {currentId !== -1 && <Popup />}
-      <header className={styles.header}>
-        <div className={styles.headerContent}>
-          <div className={classnames(styles.materialSymbols, styles.headerCreate)} onClick={openPopup}>
-            add
-          </div>
-          <h1 className={styles.headerHead}>СПИСОК ЗАДАЧ НА ПРАКТИКУ</h1>
-          <StarsSvg className={styles.headerClear} onClick={clearTasks} />
-        </div>
-      </header>
+    <Box className={styles.app}>
+      <CssBaseline />
+      {todoStore.currentId !== -1 && <Popup />}
+      <AppBar position="static">
+        <Container maxWidth="lg">
+          <Stack direction="row" py={2}>
+            <Fab color="primary" aria-label="add" onClick={openPopup}>
+              <Add />
+            </Fab>
+            <Typography variant="h1" flex={1} align="center">
+              СПИСОК ЗАДАЧ НА ПРАКТИКУ
+            </Typography>
+            <Fab color="primary" aria-label="clear-all" onClick={clearTasks}>
+              <ClearAll />
+            </Fab>
+          </Stack>
+        </Container>
+      </AppBar>
 
-      <main className={styles.content}>
-        <ul className={styles.contentTasks}>{taskList}</ul>
-      </main>
-    </div>
+      <Container maxWidth="lg">
+        <Stack spacing={3} mt={4}>
+          {taskList}
+        </Stack>
+      </Container>
+    </Box>
   );
 }
 
-export default App;
+export default observer(App);
