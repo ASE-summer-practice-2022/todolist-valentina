@@ -1,6 +1,9 @@
 import { createContext } from "react";
-import { TodoStore } from "./TodoStore";
 
-export const RootContext = createContext({
+import TodoStore from "./TodoStore";
+
+const RootContext = createContext({
   todoStore: new TodoStore(),
 });
+
+export default RootContext;

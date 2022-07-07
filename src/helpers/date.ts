@@ -3,4 +3,4 @@ export function parseDate(date: string | Date) {
 }
 
 export const today = new Date();
-export const tomorrow = new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
+export const tomorrow = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);

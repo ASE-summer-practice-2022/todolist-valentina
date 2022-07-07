@@ -1,35 +1,17 @@
 @import "../../styles/colors";
 
 .task {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 18px;
   box-shadow: 2px 2px 10px $peach;
   padding: 25px 40px;
   font-size: 20px;
   border-radius: 5px;
-  gap: 18px;
   background-color: $beige;
   transition: 300ms;
   transition-timing-function: ease-in;
   animation: rising 1s forwards;
-
-  @import "../../styles/button";
-  @import "../../styles/checkbox";
-  .dates {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  .subject {
-    flex: 1;
-    text-align: center;
-  }
-  .del {
-    font-weight: 300;
-  }
 }
-
 .completed {
   background-color: $light-grey;
   box-shadow: 2px 2px 10px $grey;
