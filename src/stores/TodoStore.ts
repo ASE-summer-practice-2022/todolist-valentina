@@ -1,40 +1,49 @@
-import { makeAutoObservable } from "mobx";
-import { v4 as uuidv4 } from "uuid";
+import { makeAutoObservable, observable, ObservableMap } from "mobx";
 
-import Task from "../models/Task";
+import Todo, { ITodo } from "../models/Todo";
 
 class TodoStore {
-  todos: Task[];
+  private _todos: ObservableMap<string, Todo>;
 
   currentId: number | string;
 
+  get todos() {
+    return Array.from(this._todos.values());
+  }
+
+  get currentTodo() {
+    return this._todos.get(String(this.currentId));
+  }
+
   constructor() {
     makeAutoObservable(this);
-    this.todos = JSON.parse(localStorage.getItem("todos") || "[]");
+
+    this._todos = observable.map<string, Todo>(
+      JSON.parse(localStorage.getItem("todos") || "[]").map((todo: Todo) => [todo.id, new Todo(todo)])
+    );
     this.currentId = -1;
   }
 
-  addTodo = (todo: Task) => {
-    this.todos.push({ ...todo, id: uuidv4(), completed: false });
+  addTodo = (todo: ITodo) => {
+    const newTodo = new Todo(todo);
+    this._todos.set(newTodo.id, newTodo);
   };
 
   deleteTodo = (id: string) => {
-    const updatedTodos = this.todos.filter((todo) => todo.id !== id);
-    this.todos = updatedTodos;
+    this._todos.delete(id);
   };
 
-  updateTodo = (updatedTodo: Task) => {
-    const updateTodos = this.todos.map((todo) => (todo.id === updatedTodo.id ? updatedTodo : todo));
-    this.todos = updateTodos;
+  updateTodo = (todo: ITodo) => {
+    const newTodo = new Todo(todo);
+    this._todos.set(todo.id, newTodo);
   };
 
   toggleCompleted = (id: string) => {
-    const updatedTodo = this.todos.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo));
-    this.todos = updatedTodo;
+    this._todos.get(id)?.toggle();
   };
 
-  clearTasks = () => {
-    this.todos = [];
+  clearTodos = () => {
+    this._todos.clear();
   };
 
   setCurrentId = (id: number | string) => {

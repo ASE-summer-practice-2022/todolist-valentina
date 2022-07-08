@@ -5,16 +5,16 @@ import React, { useState } from "react";
 
 import { parseDate } from "../../helpers/date";
 import useStore from "../../hooks/useStore";
-import styles from "./todo.module.scss";
+import styles from "./todo-item.module.scss";
 
-interface TaskProps {
+interface TaskItemProps {
   id: string;
   name: string;
   terms: string[] | Date[];
   completed: boolean;
 }
 
-function Todo({ id, name, terms, completed }: TaskProps) {
+function TodoItem({ id, name, terms, completed }: TaskItemProps) {
   const { todoStore } = useStore();
   const [fade, setFade] = useState(false);
 
@@ -25,11 +25,11 @@ function Todo({ id, name, terms, completed }: TaskProps) {
 
   return (
     <Stack
-      className={classnames(styles.task, completed && styles.completed, fade && styles.fade)}
+      className={classnames(styles.todo, completed && styles.completed, fade && styles.fade)}
       direction="row"
       onAnimationEnd={rmTodo}
     >
-      <Checkbox defaultChecked={completed} onChange={toggleChb} />
+      <Checkbox checked={completed} onChange={toggleChb} />
       <Stack spacing={2}>
         <Box>Дата выдачи: {parseDate(terms[0])}</Box>
         <Box>Дата сдачи: {parseDate(terms[1])}</Box>
@@ -48,4 +48,4 @@ function Todo({ id, name, terms, completed }: TaskProps) {
   );
 }
 
-export default observer(Todo);
+export default observer(TodoItem);

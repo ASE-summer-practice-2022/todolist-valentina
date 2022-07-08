@@ -7,9 +7,9 @@ import React, { useEffect } from "react";
 
 import styles from "./app.module.scss";
 import Popup from "./components/Popup";
-import Todo from "./components/Todo";
+import TodoItem from "./components/TodoItem";
 import useStore from "./hooks/useStore";
-import Task from "./models/Task";
+import Todo from "./models/Todo";
 
 function App() {
   const { todoStore } = useStore();
@@ -18,10 +18,10 @@ function App() {
     autorun(() => localStorage.setItem("todos", JSON.stringify(todoStore.todos)));
   }, [todoStore.todos]);
 
-  const taskList = todoStore.todos.map((task: Task) => <Todo key={task.id} {...task} />);
+  const todoList = todoStore.todos.map((todo: Todo) => <TodoItem key={todo.id} {...todo} />);
 
   const openPopup = () => todoStore.setCurrentId(0);
-  const clearTasks = () => todoStore.clearTasks();
+  const clearTodos = () => todoStore.clearTodos();
 
   return (
     <Box className={styles.app}>
@@ -36,7 +36,7 @@ function App() {
             <Typography variant="h1" flex={1} align="center">
               СПИСОК ЗАДАЧ НА ПРАКТИКУ
             </Typography>
-            <Fab color="primary" aria-label="clear-all" onClick={clearTasks}>
+            <Fab color="primary" aria-label="clear-all" onClick={clearTodos}>
               <ClearAll />
             </Fab>
           </Stack>
@@ -45,7 +45,7 @@ function App() {
 
       <Container maxWidth="lg">
         <Stack spacing={3} mt={4}>
-          {taskList}
+          {todoList}
         </Stack>
       </Container>
     </Box>
